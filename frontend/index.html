@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Audiobook Haven</title>
+        <style>
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+                text-align: center;
+                transition: color 0.3s, transform 0.3s;
+            }
+
+            h1:hover {
+                color: black;
+                transform: scale(1.1);
+            }
+
+            p {
+                transition: color 0.3s, transform 0.3s;
+            }
+
+            p:hover {
+                color: black;
+                transform: scale(1.1);
+            }
+            body {
+                margin: 0;
+                font-family: "Poppins", Arial, sans-serif;
+                overflow-x: hidden;
+            }
+
+            .parallax {
+                position: relative;
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #ffffff;
+                text-align: center;
+            }
+
+            .section {
+                position: relative;
+                padding: 5rem 2rem;
+                background: #ffffff;
+                color: #333;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .parallax h1 {
+                font-size: 3.5rem;
+                margin: 0;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            }
+
+            .parallax p {
+                font-size: 1.5rem;
+                margin-top: 1rem;
+            }
+
+            .section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+           
+
+            .cta a {
+                text-decoration: none;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #ffffff;
+                background: #00bfa5;
+                padding: 0.8rem 1.5rem;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+                margin: 0 0.5rem;
+            }
+
+            .cta a:hover {
+                background: #00897b;
+                transform: translateY(-3px);
+            }
+
+            /* Unique backgrounds for each parallax section */
+            .parallax.hero {
+                background-image: url("Images/image10.webp");
+            }
+
+            .parallax.featured {
+                background-image: url("Images/image7.jpg");
+            }
+
+            .parallax.cta {
+                background-image: url("Images/image6.jpg");
+            }
+
+            @media (max-width: 768px) {
+                .parallax h1 {
+                    font-size: 2.5rem;
+                }
+
+                .parallax p {
+                    font-size: 1.2rem;
+                }
+
+                .cta a {
+                    font-size: 1rem;
+                    padding: 0.6rem 1.2rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Section 1: Hero -->
+        <div class="parallax hero">
+            <div>
+                <h1>Welcome to Audiobook Haven</h1>
+                <p>Immerse yourself in a world of captivating stories and knowledge.</p>
+                <div class="cta">
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Discover -->
+        <div class="section">
+            <h2>Discover Endless Possibilities</h2>
+            <p>
+                Explore a library of audiobooks spanning genres like fiction, self-help,
+                and more.
+            </p>
+        </div>
+
+        <!-- Section 3: Featured Content -->
+        <div class="parallax featured">
+            <div>
+                <h1>Featured Audiobooks</h1>
+                <p>Handpicked favorites just for you.</p>
+            </div>
+        </div>
+
+        <!-- Section 4: Community -->
+        <div class="section">
+            <h2>Join Our Community</h2>
+            <p>
+                Connect with like-minded listeners and share your favorite audiobooks.
+            </p>
+        </div>
+
+        <!-- Section 5: Call to Action -->
+        <div class="parallax cta">
+            <div>
+                <h1>Start Listening Today</h1>
+                <p>Sign up now and transform your free time into listening time.</p>
+                <div class="cta">
+                    <a href="/signup">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

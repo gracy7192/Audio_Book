@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sign Up User</title>
+
+        <style>
+            body {
+                margin: 0;
+                /* font-family: 'Georgia', serif; */
+                background-color: #f8ede3;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .signup_container {
+                background-color: #ffffff;
+                padding: 2.5rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            h1 {
+                color: black;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+                text-align: center;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .form_container div {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            label {
+                font-size: 1rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                color:black;
+            }
+
+            input {
+                
+                padding: 0.7rem;
+                font-size: 1rem;
+                border: 1px solid black;
+                border-radius: 8px;
+                background-color: #fafafa;
+                transition: border-color 0.3s;
+            }
+
+            input:focus {
+                border-color: #f57c00;
+                outline: none;
+            }
+
+            button {
+                padding: 0.8rem;
+                width: 100%;
+                font-size: 1rem;
+                font-weight: bold;
+                background: #ff6f61;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #e64a19;
+            }
+
+            .submit_btn {
+                width: 100%;
+            }
+
+            a {
+                color: #f57c00;
+                text-decoration: none;
+                font-size: 0.9rem;
+                margin-top: 1rem;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            #error-win {
+                color: red;
+                font-size: 0.9rem;
+                margin-top: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="signup_container">
+            <h1>Sign Up User</h1>
+            <form id="register_form">
+                <div class="form_container">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="submit_btn" >
+                    <button id="submit-btn">Sign Up</button>
+                </div>
+            </form>
+            <a href="/login">Already have an account? Login</a>
+            <div id="error-win"></div>
+        </div>
+
+        <script>
+            const submit_btn = document.getElementById("submit-btn");
+            const error_win = document.getElementById("error-win");
+
+            submit_btn.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById("name").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                if (!name || !email || !password) {
+                    error_win.innerHTML = "Please fill all the fields";
+                    return;
+                }
+
+                const data = {
+                    name,
+                    email,
+                    password,
+                };
+
+                fetch("/user/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then((res) => {
+                        if (res.status === 201) {
+                            alert("User Registered Successfully");
+                            window.location.href = "/login";
+                        } else {
+                            return res.json();
+                        }
+                    })
+                    .then((data) => {
+                        error_win.innerHTML = data.message;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            });
+        </script>
+    </body>
+</html>
