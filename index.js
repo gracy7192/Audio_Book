@@ -1,4 +1,5 @@
 import fs from "fs";
+import path from "path";
 import http from "http";
 
 const server = http.createServer();
@@ -16,16 +17,39 @@ server.on("request", (req, res) => {
             res.end(fs.readFileSync("frontend/index.html", "utf-8"));
         }
 
-        if (req.url === "/signup") {
+        else if (req.url === "/signup") {
             res.statusCode = 200;
             res.setHeader("Content-Type", "text/html");
             res.end(fs.readFileSync("frontend/signup.html", "utf-8"));
         }
 
-        if (req.url === "/login") {
+        else if (req.url === "/login") {
             res.statusCode = 200;
             res.setHeader("Content-Type", "text/html");
             res.end(fs.readFileSync("frontend/login.html", "utf-8"));
+        }
+
+        else if (req.url.startsWith("/Images/")) {
+            const imgPath = path.join("frontend", req.url);
+            const ext = path.extname(imgPath);
+            const mimeTypes = {
+                ".jpg": "image/jpeg",
+                ".jpeg": "image/jpeg",
+                ".png": "image/png",
+                ".gif": "image/gif",
+                ".webp": "image/webp",
+            };
+
+            res.setHeader("Content-Type", mimeTypes[ext]);
+            res.end(fs.readFileSync(imgPath));
+        }
+
+        else {
+            res.statusCode = 404;
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({
+                message: "Page Not Found",
+            }));
         }
     }
 
